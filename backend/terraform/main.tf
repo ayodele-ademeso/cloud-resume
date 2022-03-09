@@ -14,12 +14,12 @@ provider "aws" {
 
 #Call s3 module
 module "s3" {
-  source      = "./modules/"
+  source = "./modules/"
 }
 
 #Call DynamoDB module
 module "dynamodb" {
-    source = "./modules/"
+  source = "./modules/"
 }
 
 #Call API module

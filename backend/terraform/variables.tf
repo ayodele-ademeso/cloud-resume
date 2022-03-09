@@ -4,7 +4,7 @@ variable "aws-region" {
 }
 
 variable "dynamo_db_table" {
-  type = string
+  type    = string
   default = "visitor-count"
 }
 
