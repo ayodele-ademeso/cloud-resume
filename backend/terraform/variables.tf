@@ -11,11 +11,11 @@ variable "dynamo_db_table" {
 variable "bucket_name" {
   description = "S3 bucket to store static files"
   type        = string
-  default     = "cloud-resume-bucket"
+  default     = "cloud-resume-spencer"
 }
 
 variable "acl_value" {
   description = "ACL to be set on bucket"
   type        = string
-  default     = "public"
+  default     = "public-read-write"
 }

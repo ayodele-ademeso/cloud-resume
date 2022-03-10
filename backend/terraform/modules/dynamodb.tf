@@ -1,22 +1,55 @@
 resource "aws_dynamodb_table" "dynamodb" {
     name = "$var.dynamo_db_table"
-    hash_key = "id"
+    hash_key = "visitorcount"
     billing_mode = "PAY_PER_REQUEST"
 
     attribute {
-      name = "id"
+      name = "visitorcount"
       type = "S"
     }
   
 }
 
-resource "aws_dynamodb_table_item" "tableitem" {
-    table_name = aws_dynamodb_table.dynamodb.id
-    hash_key = aws_dynamodb_table.dynamodb.hash_key
+# resource "aws_dynamodb_table" "basic-dynamodb-table" {
+#   name           = "GameScores"
+#   billing_mode   = "PROVISIONED"
+#   read_capacity  = 20
+#   write_capacity = 20
+#   hash_key       = "UserId"
+#   range_key      = "GameTitle"
 
-    item = <<ITEM
-{
-    "id": {"N": "visitorcount"}
-}
-ITEM
-}
+#   attribute {
+#     name = "UserId"
+#     type = "S"
+#   }
+
+#   attribute {
+#     name = "GameTitle"
+#     type = "S"
+#   }
+
+#   attribute {
+#     name = "TopScore"
+#     type = "N"
+#   }
+
+#   ttl {
+#     attribute_name = "TimeToExist"
+#     enabled        = false
+#   }
+
+#   global_secondary_index {
+#     name               = "GameTitleIndex"
+#     hash_key           = "GameTitle"
+#     range_key          = "TopScore"
+#     write_capacity     = 10
+#     read_capacity      = 10
+#     projection_type    = "INCLUDE"
+#     non_key_attributes = ["UserId"]
+#   }
+
+#   tags = {
+#     Name        = "dynamodb-table-1"
+#     Environment = "production"
+#   }
+# }
