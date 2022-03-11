@@ -8,19 +8,20 @@ def lambda_handler(event,context):
     dynamodbTable = os.environ['ddbname']
     table = dynamodb.Table(dynamodbTable)
 
-    #update item in table by 1 or add item if it does not exist
+    #update value of item atrribute in table by 1 or add attribute if it does not exist
     dynamodbResponse = table.update_item(
         Key = {
             "visitorcount": "count"
         },
-        UpdateExpression='SET counter = counter + :inc',
+        #Using 'ADD' to increment value of the attribute 'count' by 1
+        UpdateExpression='ADD counters :inc', #counter is a reserved keyword so I went with counters.
         ExpressionAttributeValues={
             ':inc': 1
         },
         ReturnValues= "UPDATED_NEW"
     )
 
-    responseBody = json.dumps({"count": int(float(dynamodbResponse["Attributes"]["counter"]))})
+    responseBody = json.dumps({"count": int(float(dynamodbResponse["Attributes"]["counters"]))})
 
     response = {
         'Status-code': 200,

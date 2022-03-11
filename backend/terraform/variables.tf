@@ -17,5 +17,5 @@ variable "bucket_name" {
 variable "acl_value" {
   description = "ACL to be set on bucket"
   type        = string
-  default     = "public-read-write"
+  default     = "public-read"
 }
