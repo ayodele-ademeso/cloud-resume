@@ -4,3 +4,4 @@
 .terraform.lock.hcl
 *modules*
 lambda_function.zip
+settings.json
