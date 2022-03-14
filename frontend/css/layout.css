@@ -197,13 +197,13 @@ ul#nav li.current a { color: #F06000; }
 #about a:hover, #about a:focus { color: #11ABB0; }
 
 #about h2 {
-   font: 22px/30px 'opensans-bold', sans-serif;
+   font: 27px/30px 'opensans-bold', sans-serif;
    color: #fff;
    margin-bottom: 12px;
 }
 #about p {
    line-height: 30px;
-   color: #7A7A7A;
+   color: #ffffff;
 }
 #about .profile-pic {
    position: relative;
@@ -292,7 +292,7 @@ body,
 #resume .header-col { padding-top: 9px; }
 #resume .main-col { padding-right: 10%; }
 
-.education, .work {
+.education {
    margin-bottom: 48px;
    padding-bottom: 24px;
    border-bottom: 1px solid #E8E8E8;
@@ -332,182 +332,27 @@ body,
    margin-top: 6px;
 }
 
-/*----------------------------------------------*/
-/*	Skill Bars
-/*----------------------------------------------*/
-
-.bars {
-	width: 95%;
-	float: left;
-	padding: 0;
-	text-align: left;
+.work {
+   margin-bottom: 48px;
+   padding-bottom: 24px;
+   border-bottom: 1px solid #E8E8E8;
 }
-.bars .skills {
-  	margin-top: 36px;
-   list-style: none;
+#resume .info {
+   font: 16px/24px 'librebaskerville-italic', serif;
+   color: #6E7881;
+   margin-bottom: 18px;
+   margin-top: 9px;
 }
-.bars li {
-   position: relative;
-  	margin-bottom: 60px;
-  	background: #ccc;
-  	height: 42px;
-  	border-radius: 3px;
+#resume .info span {
+   margin-right: 5px;
+   margin-left: 5px;
 }
-.bars li em {
-	font: 15px 'opensans-bold', sans-serif;
-   color: #313131;
-	text-transform: uppercase;
-   letter-spacing: 2px;
-	font-weight: normal;
-   position: relative;
-	top: -36px;
-}
-.bar-expand {
-   position: absolute;
-   left: 0;
-   top: 0;
-
-   margin: 0;
-   padding-right: 24px;
-  	background: #313131;
-   display: inline-block;
-  	height: 42px;
-   line-height: 42px;
-   border-radius: 3px 0 0 3px;
+#resume .date {
+   font: 15px/24px 'opensans-regular', sans-serif;
+   margin-top: 6px;
 }
 
-.linuxserveradministration {
-  	width: 90%;
-  	-animation: linuxserveradministration 2s ease;
-  	-animation: linuxserveradministration 2s ease;
-}
-.webservers {
-  	width: 55%;
-  	-animation: webservers 2s ease;
-  	-animation: webservers 2s ease;
-}
-.bashscripting {
-  	width: 50%;
-  	-animation: bashscripting 2s ease;
-  	-animation: bashscripting 2s ease;
-}
-.python {
-  	width: 90%;
-  	-animation: python 2s ease;
-  	-animation: python 2s ease;
-}
-.docker {
-  	width: 80%;
-  	-animation: docker 2s ease;
-  	-animation: docker 2s ease;
-}
-.kubernetes {
-  	width: 50%;
-  	-animation: kubernetes 2s ease;
-  	-animation: kubernetes 2s ease;
-}
-.versioncontrol {
-   width: 50%;
-   -animation: kubernetes 2s ease;
-   -animation: kubernetes 2s ease;
-}
-.aws {
-   width: 50%;
-   -animation: kubernetes 2s ease;
-   -animation: kubernetes 2s ease;
-}
-.databases {
-   width: 50%;
-   -animation: kubernetes 2s ease;
-   -animation: kubernetes 2s ease;
-}
-.iac {
-   width: 50%;
-   -animation: kubernetes 2s ease;
-   -animation: kubernetes 2s ease;
-}
 
-@-moz-keyframes linuxserveradministration {
-  0%   { width: 0px;  }
-  100% { width: 90%;  }
-}
-@-moz-keyframes webservers {
-  0%   { width: 0px;  }
-  100% { width: 55%;  }
-}
-@-moz-keyframes bashscripting {
-  0%   { width: 0px;  }
-  100% { width: 50%;  }
-}
-@-moz-keyframes python {
-  0%   { width: 0px;  }
-  100% { width: 90%;  }
-}
-@-moz-keyframes docker {
-  0%   { width: 0px;  }
-  100% { width: 80%;  }
-}
-@-moz-keyframes kubernetes {
-  0%   { width: 0px;  }
-  100% { width: 50%;  }
-}
-@-moz-keyframes versioncontrol {
-   0%   { width: 0px;  }
-   100% { width: 50%;  }
-}
-@-moz-keyframes aws {
-   0%   { width: 0px;  }
-   100% { width: 50%;  }
-}
-@-moz-keyframes databases {
-   0%   { width: 0px;  }
-   100% { width: 50%;  }
-}
-@-moz-keyframes iac {
-   0%   { width: 0px;  }
-   100% { width: 50%;  }
-}
-
-@keyframes linuxserveradministration {
-  0%   { width: 0px;  }
-  100% { width: 90%;  }
-}
-@keyframes webservers {
-  0%   { width: 0px;  }
-  100% { width: 55%;  }
-}
-@keyframes bashscripting {
-  0%   { width: 0px;  }
-  100% { width: 50%;  }
-}
-@keyframes python {
-  0%   { width: 0px;  }
-  100% { width: 90%;  }
-}
-@keyframes docker {
-  0%   { width: 0px;  }
-  100% { width: 80%;  }
-}
-@keyframes kubernetes {
-  0%   { width: 0px;  }
-  100% { width: 50%;  }
-}
-@keyframes versioncontrol {
-  0%   { width: 0px;  }
-  100% { width: 50%;  }
-}
-@keyframes aws {
-  0%   { width: 0px;  }
-  100% { width: 50%;  }
-}
-@keyframes databases {
-  0%   { width: 0px;  }
-  100% { width: 50%;  }
-}
-@keyframes iac {
-  0%   { width: 0px;  }
-  100% { width: 50%;  }
-}
 
 /* ------------------------------------------------------------------ */
 /* e. Call To Action Section
@@ -566,69 +411,7 @@ call-to-action .button {
 	color: #D8D8D8;
 }
 
-/* ------------------------------------------------------------------
-/* f. Testimonials
-/* ------------------------------------------------------------------ */
 
-#testimonials {
-   background: #1F1F1F url(../images/testimonials-bg.jpg) no-repeat center center;
-   background-size: cover !important;
-	-webkit-background-size: cover !important;
-   background-attachment: fixed;
-
-   position: relative;
-   min-height: 200px;
-   width: 100%;
-   overflow: hidden;
-}
-#testimonials .text-container {
-   padding-top: 96px;
-   padding-bottom: 66px;
-}
-#testimonials h1 {
-   font: 18px/24px 'opensans-bold', sans-serif;   
-   text-transform: uppercase;
-   letter-spacing: 3px;
-   color: #fff;
-}
-#testimonials h1 span { display: none; }
-#testimonials .header-col { padding-top: 9px; }
-#testimonials .header-col h1:before {
-   font-family: 'FontAwesome';
-   content: "\f10d";
-	padding-right: 10px;
-	font-size: 72px;
-   line-height: 72px;
-   text-align: left;
-   float: left;
-   color: #fff;
-}
-
-/*	Blockquotes */
-#testimonials blockquote {
-   margin: 0 0px 30px 0px;
-   padding-left: 0;
-   position: relative;
-   text-shadow: 0px 1px 3px rgba(0, 0, 0, 1);
-}
-#testimonials blockquote:before { content: none; }
-#testimonials blockquote p {
-   font-family: 'librebaskerville-italic', serif;
-   padding: 0;
-   font-size: 24px;
-   line-height: 48px;
-   color: #fff
-}
-#testimonials blockquote cite {
-   display: block;
-   font-size: 12px;
-   font-style: normal;
-   line-height: 18px;
-   color: #fff;
-}
-#testimonials blockquote cite:before { content: "\2014 \0020"; }
-#testimonials blockquote cite a,
-#testimonials blockquote cite a:visited { color: #8B9798; border: none }
 
 /* Flex Slider
 /* ------------------------------------------------------------------ */
