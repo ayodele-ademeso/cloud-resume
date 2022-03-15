@@ -5,3 +5,8 @@
 *modules*
 lambda_function.zip
 settings.json
+backend/assume_role_policy.json
+backend/policy.json
+backend/terraform/terraform.*
+backend/terraform/terraform.tfstate
+backend/terraform/terraform.tfstate*
