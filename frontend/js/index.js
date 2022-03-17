@@ -1,31 +1,23 @@
-var counterContainer = document.querySelector(".website-counter");
-var resetButton = document.querySelector("#reset") //to be removed later
-var visitCount = localStorage.getItem("page-view");
+window.addEventListener('DOMContentLoaded', (event) =>{
+    getVisitCount();
+})
 
-if (visitCount) {
-    visitCount = Number(visitCount) + 1;
-    //update local storage value
-    localStorage.setItem("page-view", visitCount)
-} else {
-    visitCount = 1;
-    //Add entry for key="page-view"
-    localStorage.setItem("page-view", 1);
+var functionApiUrl = ('https://euxxn8zvn9.execute-api.us-east-1.amazonaws.com/prod/count/');
+
+var getVisitCount = () => {
+
+    fetch(functionApiUrl)
+        .then(response => {
+            return response.json()
+
+        }).then(response => {
+            console.log("Visitor Count: " + response.body);
+            count =  response.body;
+            document.querySelector("#count").innerHTML = count;
+            // document.getElementById("count").innerText = count;
+        })
+        .catch(function (error){
+            console.log("Error: " + error);
+        });
+        return count;
 }
-
-//display visitor count on web page
-counterContainer.innerHTML = visitCount;
-
-//Adding onClick even listener, to be removed later
-resetButton.addEventListener("click", () => {
-    visitCount = 1;
-    localStorage.setItem("page-view", 1);
-    counterContainer.innerHTML = visitCount;
-});
-
-
-
-
-
-
-
-
