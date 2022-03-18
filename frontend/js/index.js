@@ -2,17 +2,17 @@ window.addEventListener('DOMContentLoaded', (event) =>{
     getVisitCount();
 })
 
-var functionApiUrl = ('https://euxxn8zvn9.execute-api.us-east-1.amazonaws.com/prod/count/');
+const functionApiUrl = ('https://euxxn8zvn9.execute-api.us-east-1.amazonaws.com/prod/count/');
 
-var getVisitCount = () => {
+const getVisitCount = () => {
 
     fetch(functionApiUrl)
         .then(response => {
             return response.json()
 
         }).then(response => {
-            console.log("Visitor Count: " + response.body);
-            count =  response.body;
+            console.log("Website called API");
+            count =  response.count;
             document.querySelector("#count").innerHTML = count;
             // document.getElementById("count").innerText = count;
         })
