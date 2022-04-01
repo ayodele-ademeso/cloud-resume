@@ -5,13 +5,13 @@ variable "aws-region" {
 
 variable "dynamo_db_table" {
   type    = string
-  default = "visitor-count"
+  default = "visitor-counter"
 }
 
 variable "bucket_name" {
   description = "S3 bucket to store static files"
   type        = string
-  default     = "cloud-resume-spencer"
+  default     = "www.ayodele.cloud"
 }
 
 variable "acl_value" {
