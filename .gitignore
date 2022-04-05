@@ -1,4 +1,5 @@
 .env
+__pycache__
 *variables.tf
 *.terraform*
 .terraform.lock.hcl
@@ -10,3 +11,4 @@ backend/policy.json
 backend/terraform/terraform.*
 backend/terraform/terraform.tfstate
 backend/terraform/terraform.tfstate*
+sam-backend
