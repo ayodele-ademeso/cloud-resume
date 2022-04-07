@@ -23,3 +23,5 @@ jobs:
           aws-region: ${{ secrets.AWS_REGION }}
       - name: Deploy app to s3
         run: aws s3 sync ./frontend/ s3://${{ secrets.S3_BUCKET }} --exclude '.git/*'
+      - name: Invalidate Cloudfront cache
+        run: aws cloudfront create-invalidation --distribution-id ${{ secrets.CLOUDFRONT_ID }} --paths "/*"
