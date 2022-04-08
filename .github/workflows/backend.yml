@@ -1,4 +1,4 @@
-name: 'Terraform'
+name: 'Terraform Deploy'
 
 on:
   push:
@@ -11,41 +11,65 @@ on:
     - "backend/**"
 
 jobs:
-  terraform:
-    name: 'Terraform'
+  checkout:
+    name: Checkout
     runs-on: ubuntu-latest
-    environment: production
-
-    # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
-    defaults:
-      run:
-        shell: bash
-
     steps:
-    # Checkout the repository to the GitHub Actions runner
-    - name: Checkout
-      uses: actions/checkout@v3
+      - uses: actions/checkout@v2
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+      - name: Python setup
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.8"
+          architecture: "x64"
+      
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r backend/requirements.txt
+          pip install moto boto3
+        
+      - name: Test
+        run: python test_lambda_function.py
 
-    # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
-    - name: Setup Terraform
-      uses: hashicorp/setup-terraform@v1
-      with:
-        cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+  terraform:
+    runs-on: ubuntu-latest
+    needs: 
+    - checkout
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
 
-    # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
-    - name: Terraform Init
-      run: terraform init
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
 
-    # Checks that all Terraform configuration files adhere to a canonical format
-    - name: Terraform Format
-      run: terraform fmt -check
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v1
 
-    # Generates an execution plan for Terraform
-    - name: Terraform Plan
-      run: terraform plan
+      - name: Terraform Init
+        working-directory: backend/terraform/
+        run: |
+          terraform init \
+            -backend-config "bucket=www.ayodele.cloud" \
+            -backend-config "key=backend/terraform.tfstate"
+          terraform workspace new dev || terraform workspace select dev
+      - name: Terraform Format
+        working-directory: backend/terraform/
+        run: terraform fmt
 
-      # On push to main, build or change infrastructure according to Terraform configuration files
-      # Note: It is recommended to set up a required "strict" status check in your repository for "Terraform Cloud". See the documentation on "strict" required status checks for more information: https://help.github.com/en/github/administering-a-repository/types-of-required-status-checks
-    - name: Terraform Apply
-      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-      run: terraform apply -auto-approve
+      - name: Terraform Plan
+        working-directory: backend/terraform/
+        run: terraform plan -var="environment=development"
+
+      - name: Terraform Apply
+        working-directory: backend/terraform/
+        run: terraform apply -var="environment=development" -auto-approve
