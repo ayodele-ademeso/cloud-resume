@@ -1,4 +1,4 @@
-name: 'Terraform Deploy'
+name: 'Lambda Deploy'
 
 on:
   push:
@@ -34,8 +34,8 @@ jobs:
           pip install -r backend/requirements.txt
           pip install moto boto3
         
-      - name: Test
-        run: python ../../backend/test_lambda_function.py
+      # - name: Test
+      #   run: python ../../backend/test_lambda_function.py
 
       - name: Package and update lambda
         run: |
