@@ -2,7 +2,7 @@ import boto3
 import os
 import json
 import unittest
-from contextlib import contextmanager
+import botocore.exceptions
 from moto import mock_dynamodb2
 import lambda_function
 from unittest import mock
@@ -12,15 +12,9 @@ TABLE = 'testdb'
 class LambdaTest(unittest.TestCase):
     """Tests for lambda function"""
 
-    @contextmanager
-    def do_test_setup():
-        with mock_dynamodb2():
-            set_up_dynamodb()
-            yield
-
-
+    @mock_dynamodb2
     def set_up_dynamodb():
-        client = boto3.client('dynamodb', region_name='us-east-1')
+        client = boto3.client('dynamodb')
         client.create_table(
             AttributeDefinitions=[
                 {
@@ -40,9 +34,7 @@ class LambdaTest(unittest.TestCase):
                 'WriteCapacityUnits': 1
             }
         )
-
-
-    @mock.patch.dict(os.environ, {"databaseName": TABLE})
+  
     def test_handler(*args):
         #with do_test_setup():
             # Run call with an event describing the file:
@@ -52,7 +44,7 @@ class LambdaTest(unittest.TestCase):
             assert response['statusCode'] == 200
             assert response['body'] == json.dumps({"count": 1})
 
-            response = app.lambda_handler(None, None)
+            response = lambda_function.lambda_handler(None, None)
 
             assert response['statusCode'] == 200
             assert response['body'] == json.dumps({"count": 2})

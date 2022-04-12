@@ -1,12 +1,14 @@
 import boto3
 import json
 import os
+import botocore.exceptions
 
 def lambda_handler(event,context):
 
     dynamodb = boto3.resource('dynamodb')
     dynamodbTable = os.environ['ddbname']
     table = dynamodb.Table(dynamodbTable)
+    response = None
 
     #update value of item atrribute in table by 1 or add attribute if it does not exist
     try:
@@ -21,7 +23,7 @@ def lambda_handler(event,context):
             },
             ReturnValues= "UPDATED_NEW"
         )
-    except ClientError as e:
+    except botocore.exceptions.ClientError as e:
         print(e)
     else:
         responseBody = json.dumps({"count": int(float(dynamodbResponse["Attributes"]["counters"]))})
