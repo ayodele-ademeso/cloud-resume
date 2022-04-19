@@ -15,4 +15,4 @@
 
 Website URL: https://www.ayodele.cloud
 
-Blogpost:  https://ayodelespencer.hasnode.dev
+Blogpost:  https://blog.ayodele.cloud
