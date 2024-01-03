@@ -6,9 +6,10 @@ import botocore.exceptions
 def lambda_handler(event,context):
 
     dynamodb = boto3.resource('dynamodb')
-    dynamodbTable = os.environ['ddbname']
+    dynamodbTable = os.environ['DB_NAME']
     table = dynamodb.Table(dynamodbTable)
     response = None
+    responseBody = {}  # Initialize with an empty dictionary
 
     #update value of item atrribute in table by 1 or add attribute if it does not exist
     try:
@@ -25,16 +26,8 @@ def lambda_handler(event,context):
         )
     except botocore.exceptions.ClientError as e:
         print(e)
+
     else:
         responseBody = json.dumps({"count": int(float(dynamodbResponse["Attributes"]["counters"]))})
 
-        response = {
-            'Status-code': 200,
-            'body': responseBody,
-            'headers': {
-                'content-type': 'application/json',
-                'Access-Control-Allow-Origin': '*'
-            }
-        }
-
-    return response
+    return responseBody

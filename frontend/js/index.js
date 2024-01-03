@@ -2,7 +2,7 @@ window.addEventListener('DOMContentLoaded', (event) =>{
     getVisitCount();
 })
 
-const functionApiUrl = ('https://4df3jdh18f.execute-api.us-east-1.amazonaws.com/prod/count/');
+const functionApiUrl = ('https://w2tagdzwhj.execute-api.us-east-1.amazonaws.com/dev/count');
 
 const getVisitCount = () => {
 
