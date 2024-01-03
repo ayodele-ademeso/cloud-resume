@@ -2,9 +2,10 @@ window.addEventListener('DOMContentLoaded', (event) =>{
     getVisitCount();
 })
 
-const functionApiUrl = ('https://w2tagdzwhj.execute-api.us-east-1.amazonaws.com/dev/count');
+const functionApiUrl = ('https://w2tagdzwhj.execute-api.us-east-1.amazonaws.com/dev/count/');
 
 const getVisitCount = () => {
+
 
     fetch(functionApiUrl)
         .then(response => {
@@ -12,7 +13,7 @@ const getVisitCount = () => {
 
         }).then(response => {
             console.log("Website called API");
-            count =  response.count;
+            const count = response.count;
             document.querySelector("#count").innerHTML = count;
             // document.getElementById("count").innerText = count;
         })
