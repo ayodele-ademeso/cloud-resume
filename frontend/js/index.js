@@ -6,7 +6,6 @@ const functionApiUrl = ('https://w2tagdzwhj.execute-api.us-east-1.amazonaws.com/
 
 const getVisitCount = () => {
 
-    let count;  // Declare count within the scope of getVisitCount
 
     fetch(functionApiUrl)
         .then(response => {
@@ -14,7 +13,7 @@ const getVisitCount = () => {
 
         }).then(response => {
             console.log("Website called API");
-            count =  response.count;
+            const count = response.count;
             document.querySelector("#count").innerHTML = count;
             // document.getElementById("count").innerText = count;
         })
