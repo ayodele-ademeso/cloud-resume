@@ -15,8 +15,13 @@ data "aws_iam_policy_document" "iam_for_lambda_policy" {
     )
   }
   statement {
-    actions   = ["logs:DescribeLogStreams"]
-    resources = ["*"]
+    actions = [
+      "logs:DescribeLogStreams",
+      "logs:CreateLogGroup",
+      "logs:CreateLogStream",
+      "logs:PutLogEvents",
+    ]
+    resources = ["arn:aws:logs:*:*:*"]
   }
 }
 
@@ -43,11 +48,25 @@ resource "aws_iam_role" "role_for_dynamodb" {
   }
 }
 
-# resource "aws_iam_role_policy" "lambda_policy" {
-#   name   = "lambda_policy"
-#   role   = aws_iam_role.role_for_dynamodb.id
-#   policy = file("../policy.json")
-# }
+resource "aws_iam_role_policy_attachment" "lambda_basic" {
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+  role       = aws_iam_role.role_for_dynamodb.name
+}
+
+resource "aws_lambda_permission" "apigw_lambda" {
+  statement_id  = "AllowExecutionFromAPIGateway"
+  action        = "lambda:InvokeFunction"
+  function_name = aws_lambda_function.lambda.function_name
+  principal     = "apigateway.amazonaws.com"
+
+  source_arn = "${aws_api_gateway_rest_api.api.execution_arn}/*/GET/count"
+}
+
+data "archive_file" "lambda_package" {
+  type        = "zip"
+  source_file = "../backend/lambda_function.py"
+  output_path = "../backend/lambda_function.zip"
+}
 
 # Create Lambda function
 resource "aws_lambda_function" "lambda" {
