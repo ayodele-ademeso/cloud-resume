@@ -114,3 +114,7 @@ resource "aws_api_gateway_deployment" "gateway_deployment" {
 
   rest_api_id = aws_api_gateway_rest_api.api.id
 }
+
+output "invoke_url" {
+  value = aws_api_gateway_deployment.gateway_deployment.invoke_url
+}
