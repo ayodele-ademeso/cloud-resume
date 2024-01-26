@@ -37,7 +37,7 @@ jobs:
         run: |
           zip lambda_function.zip lambda_function.py
           aws lambda update-function-code \
-              --function-name  lambda_function2 \
+              --function-name  ayodele_lambda_function \
               --zip-file fileb://lambda_function.zip
         shell: bash
         working-directory: backend/
