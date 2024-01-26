@@ -28,6 +28,7 @@ jobs:
 
       - name: Install dependencies and run Python Tests
         run: |
+          export DB_NAME=${{ secrets.DB_NAME }}
           pip install -r requirements.txt
           python -m unittest discover
         working-directory: backend/
