@@ -3,8 +3,8 @@ name: 'Lambda Deploy'
 on:
   push:
     branches: [main]
-    # paths:
-    # - "backend/**"
+    paths:
+    - "backend/**"
 
 jobs:
   checkout:
@@ -41,9 +41,3 @@ jobs:
               --zip-file fileb://lambda_function.zip
         shell: bash
         working-directory: backend/
-
-      # - name: Package and update lambda
-      #   run: |
-      #     chmod +x "${GITHUB_WORKSPACE}/.github/lambda_script.sh"
-      #     "${GITHUB_WORKSPACE}/.github/lambda_script.sh"
-      #   shell: bash
